@@ -1,0 +1,81 @@
+---
+output: rmarkdown::github_document
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, collapse = TRUE)
+```
+# homebrewanalytics
+
+Access 'Homebrew' Formluae Analytics Data
+
+## Description
+
+The 'Homebrew Project' <brew.sh> has a myriad of "recipes" that make life easier for 'macOS' users by enabling them to (mostly) effortlessly install popular open source libraries, tools, utilities and applications. The project collectes anonymous metrics from users who have not opted-out of metrics collection and makes them available via a 'JSON' 'API'.
+
+## What's Inside The Tin
+
+The following functions are implemented:
+
+- `brew_build_error_events`:	Retrieve Build Errors for the past 30 days for Homebrew Formulae
+- `brew_install_events`:	Retrieve Install Events for Homebrew Formulae
+- `brew_install_on_request_events`:	Retrieve Install-on-Requests nts for Homebrew Formulae
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_git("git@gitlab.com:hrbrmstr/homebrewanalytics")
+# or
+devtools::install_github("hrbrmstr/homebrewanalytics")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(homebrewanalytics)
+library(tidyverse)
+
+# current verison
+packageVersion("homebrewanalytics")
+
+```
+
+### Install Events
+
+You can get formlua install events for the past 30, 90 or 365 days
+
+```{r}
+xdf <- brew_install_events(30)
+
+arrange(xdf, desc(count))
+
+attr(xdf, "meta")
+```
+
+### Install On Request Events
+
+You can get formlua install-on-request events for the past 30, 90 or 365 days
+
+```{r}
+xdf <- brew_install_on_request_events(30)
+
+arrange(xdf, desc(count))
+
+attr(xdf, "meta")
+```
+
+
+### Build Error Events Events
+
+You can get formlua build error events for the past 30
+
+```{r}
+xdf <- brew_build_error_events()
+
+arrange(xdf, desc(count))
+
+attr(xdf, "meta")
+```
