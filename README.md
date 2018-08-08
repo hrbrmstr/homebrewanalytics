@@ -25,7 +25,7 @@ The following functions are implemented:
 ## Installation
 
 ``` r
-devtools::install_git("git@gitlab.com:hrbrmstr/homebrewanalytics")
+devtools::install_git("git://gitlab.com/hrbrmstr/homebrewanalytics")
 # or
 devtools::install_github("hrbrmstr/homebrewanalytics")
 ```
