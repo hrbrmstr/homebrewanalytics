@@ -11,5 +11,6 @@
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
 #' @import httr
+#' @importFrom memoise memoise
 #' @importFrom jsonlite fromJSON
 NULL
