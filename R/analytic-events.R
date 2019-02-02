@@ -18,7 +18,7 @@
       category,
       as.integer(delta[1])
     ),
-    httr::user_agent(HBUA)
+    .HBUA
   ) -> res
 
   httr::stop_for_status(res)

@@ -16,14 +16,28 @@ The 'Homebrew Project' <brew.sh> has a myriad of "recipes" that make life easier
 
 The following functions are implemented:
 
-- `brew_build_error_events`:	Retrieve Build Errors for the past 30 days for Homebrew Formulae
-- `brew_install_events`:	Retrieve Install Events for Homebrew Formulae
-- `brew_install_on_request_events`:	Retrieve Install-on-Requests nts for Homebrew Formulae
+For formulae info:
+
+- `brew_formulae`:	Retrieve formulae metadata for all homebrew-core formulae
+
+For info on "events": 
+
+- `brew_analytics_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
+
+These are just convenience and legacy API support wrappers for `brew_analytics_events()`
+
+- `brew_build_error_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
+- `brew_cask_install_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
+- `brew_install_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
+- `brew_install_on_request_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
+- `brew_os_version_events`:	Retrieve Analytics Events for Homebrew Formulae for a Given Category
 
 ## Installation
 
 ```{r eval=FALSE}
-devtools::install_git("git://gitlab.com/hrbrmstr/homebrewanalytics")
+devtools::install_git("https://git.sr.ht.com/~hrbrmstr/homebrewanalytics")
+# or
+devtools::install_gitlab("hrbrmstr/homebrewanalytics")
 # or
 devtools::install_github("hrbrmstr/homebrewanalytics")
 ```
@@ -36,46 +50,67 @@ options(width=120)
 
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 library(homebrewanalytics)
-library(tidyverse)
+library(tibble) # for printing
 
 # current verison
 packageVersion("homebrewanalytics")
 
 ```
 
-### Install Events
+### Formulae info
 
-You can get formlua install events for the past 30, 90 or 365 days
+All:
 
 ```{r}
-xdf <- brew_install_events(30)
+brew_formulae()
+```
 
-arrange(xdf, desc(count))
+One:
 
-attr(xdf, "meta")
+```{r}
+brew_formulae("curl")
+```
+
+Two:
+
+```{r}
+brew_formulae(c("curl", "wget"))
+```
+
+Errant name but still retrieves the rest:
+
+```{r}
+brew_formulae(c("curl", "wget", "doesnotexist"))
+```
+
+### Analytic Events
+
+Retrieve formlua install events for the past 30, 90 or 365 days. We'll juse use the default:
+
+```{r}
+brew_install_events()
 ```
 
 ### Install On Request Events
 
-You can get formlua install-on-request events for the past 30, 90 or 365 days
+Retrieve formlua install-on-request events for the past 30, 90 or 365 days
 
 ```{r}
-xdf <- brew_install_on_request_events(30)
-
-arrange(xdf, desc(count))
-
-attr(xdf, "meta")
+brew_install_on_request_events()
 ```
-
 
 ### Build Error Events Events
 
-You can get formlua build error events for the past 30
+Retrieve formlua build error events for the past 30
 
 ```{r}
-xdf <- brew_build_error_events()
-
-arrange(xdf, desc(count))
-
-attr(xdf, "meta")
+brew_build_error_events()
 ```
+
+```{r cloc}
+cloc::cloc_pkg_md()
+```
+
+## Code of Conduct
+
+Please note that the 'homebrewanalytics' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

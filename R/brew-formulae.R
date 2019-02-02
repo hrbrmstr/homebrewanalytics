@@ -1,10 +1,12 @@
 ..one_formula <- function(formula) {
 
+  # for testig
+  # formula <- "wget"
+
   httr::GET(
     url = sprintf(
-      "https://formulae.brew.sh/api/formula/%s.json",
-      formula
-    )
+      "https://formulae.brew.sh/api/formula/%s.json", formula
+    ), .HBUA
   ) -> res
 
   if (httr::status_code(res) != 200) {
@@ -23,10 +25,14 @@
   ) -> idx1
 
   which(
-    vapply(f, class, FUN.VALUE = character(1), USE.NAMES = FALSE) == "list"
+    vapply(f, is_length_gt_one, FUN.VALUE = logical(1), USE.NAMES = FALSE)
   ) -> idx2
 
-  idx <- unique(c(idx1, idx2))
+  which(
+    vapply(f, class, FUN.VALUE = character(1), USE.NAMES = FALSE) == "list"
+  ) -> idx3
+
+  idx <- unique(c(idx1, idx2, idx3))
 
   for (i in idx) {
     f[[i]] <- I(list(f[[i]]))
@@ -45,7 +51,7 @@
 ..all_formulae <- function() {
 
   httr::GET(
-    url = "https://formulae.brew.sh/api/formula.json"
+    url = "https://formulae.brew.sh/api/formula.json", .HBUA
   ) -> res
 
   httr::stop_for_status(res)
