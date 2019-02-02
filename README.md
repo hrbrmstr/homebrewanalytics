@@ -30,16 +30,16 @@ These are just convenience and legacy API support wrappers for
 `brew_analytics_events()`
 
   - `brew_build_error_events`: Retrieve Analytics Events for Homebrew
-    Formulae for a Given Category
+    Formulae for a build-error events
   - `brew_cask_install_events`: Retrieve Analytics Events for Homebrew
-    Formulae for a Given Category
+    Formulae for a cask-install events
   - `brew_install_events`: Retrieve Analytics Events for Homebrew
-    Formulae for a Given Category
+    Formulae for a install events
   - `brew_install_on_request_events`: Retrieve Analytics Events for
-    Homebrew Formulae for a Given Category
+    Homebrew Formulae for install-on-request events
   - `brew_os_version_events`: Retrieve Analytics Events for Homebrew
-    Formulae for a Given
-Category
+    Formulae for a OS
+events
 
 ## Installation
 
