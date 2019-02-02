@@ -44,7 +44,7 @@ events
 ## Installation
 
 ``` r
-devtools::install_git("https://git.sr.ht.com/~hrbrmstr/homebrewanalytics")
+devtools::install_git("https://git.sr.ht/~hrbrmstr/homebrewanalytics")
 # or
 devtools::install_gitlab("hrbrmstr/homebrewanalytics")
 # or

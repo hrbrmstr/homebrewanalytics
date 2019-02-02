@@ -35,7 +35,7 @@ These are just convenience and legacy API support wrappers for `brew_analytics_e
 ## Installation
 
 ```{r eval=FALSE}
-devtools::install_git("https://git.sr.ht.com/~hrbrmstr/homebrewanalytics")
+devtools::install_git("https://git.sr.ht/~hrbrmstr/homebrewanalytics")
 # or
 devtools::install_gitlab("hrbrmstr/homebrewanalytics")
 # or
